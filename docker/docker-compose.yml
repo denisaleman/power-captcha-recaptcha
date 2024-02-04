@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: power-captcha-recaptcha-dev-db
+    image: mariadb:10.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: somewordpress
+      MARIADB_DATABASE: wordpress_db
+      MARIADB_USER: wordpress_user
+      MARIADB_PASSWORD: wordpress_password
+    ports:
+      - "18766:3306"
+    volumes:
+      - power-captcha-recaptcha-db-volume:/var/lib/mysql
+
+  wordpress:
+    container_name: power-captcha-recaptcha-dev-wordpress
+    build:
+      context: .
+      dockerfile: wordpress/Dockerfile
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('SCRIPT_DEBUG', true);
+    volumes:
+      - ./../wordpress:/var/www/html:cached
+      - ./../mu-plugins:/var/www/html/wp-content/mu-plugins:cached
+      - ./../plugin:/var/www/html/wp-content/plugins/power-captcha-recaptcha:cached
+
+  adminer:
+    container_name: power-captcha-recaptcha-dev-adminer
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+
+  wpcli:
+    container_name: power-captcha-recaptcha-dev-cli
+    image: wordpress:cli-php8.1
+    command: tail -f /dev/null
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    working_dir: /var/www/html
+    depends_on:
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress_db
+    volumes:
+      - './../wordpress:/var/www/html'
+      - './../mu-plugins:/var/www/html/wp-content/mu-plugins'
+      - './../plugin:/var/www/html/wp-content/plugins/power-captcha-recaptcha'
+
+volumes:
+  power-captcha-recaptcha-db-volume:

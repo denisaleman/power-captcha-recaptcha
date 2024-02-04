@@ -1,0 +1,1 @@
+var n;(n=jQuery)(document).ready((function(){n(document).on("click",".pwrcap-notice-not-configured .notice-dismiss",(function(){var c=n(this).closest(".pwrcap-notice-not-configured").data("nonce"),o=n(this).closest(".pwrcap-notice-not-configured").data("action");n.ajax(ajaxurl,{type:"POST",data:{action:o,nonce:c}})}))}));
