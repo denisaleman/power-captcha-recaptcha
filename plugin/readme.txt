@@ -3,8 +3,8 @@ Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, comment reCAPTCHA, google recaptcha, login recaptcha, recaptcha
 Requires at least: 5.0
-Tested up to: 6.5.4
-Stable tag: 1.0.1
+Tested up to: 6.5.5
+Stable tag: 1.0.2
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,10 +59,21 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
-2. This is the second screenshot.
+1. Login form captcha.
+2. Example for a comment form.
+3. Available captchas for WordPress.
+4. Available captchas for WooCommerce.
+5. General Settings view.
 
 == Changelog ==
 
 = 1.0.0 =
 * Plugin released.
+
+= 1.0.1 (2024-06-11) =
+* Tested up to 6.5.4
+* WC tested up to 8.9.3
+
+= 1.0.2 (2024-07-01) =
+* Tested up to 6.5.5
+* Screenshots added.
