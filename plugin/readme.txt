@@ -3,8 +3,8 @@ Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, comment reCAPTCHA, google recaptcha, login recaptcha, recaptcha
 Requires at least: 5.0
-Tested up to: 6.5.5
-Stable tag: 1.0.2
+Tested up to: 6.6
+Stable tag: 1.0.3
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -77,3 +77,7 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 = 1.0.2 (2024-07-01) =
 * Tested up to 6.5.5
 * Screenshots added.
+
+= 1.0.3 (2024-07-18) =
+* Tested up to 6.6
+* Typo fixed.
