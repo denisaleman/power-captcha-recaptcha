@@ -181,9 +181,9 @@ add_filter( 'plugin_action_links_' . PWRCAP_BASENAME, 'pwrcap_add_plugin_action_
  * @return void
  */
 function pwrcap_load_language() {
-	load_plugin_textdomain( 'power-captcha-recaptcha', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	load_plugin_textdomain( 'power-captcha-recaptcha', false, dirname( plugin_basename( PWRCAP_PLUGIN_FILE ) ) . '/languages' );
 }
-add_action( 'plugins_loaded', 'pwrcap_load_language' );
+add_action( 'init', 'pwrcap_load_language' );
 
 /**
  * Validate posted captcha.

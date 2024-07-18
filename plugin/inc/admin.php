@@ -373,14 +373,14 @@ function pwrcap_field_captcha_type() {
 	$captcha_v2_checked = ( 'v2' === $captcha_type ) ? true : false;
 	?>
 	<fieldset>
-		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v3" <?php checked( 'v3', $captcha_type ); ?> /><?php esc_html_e( 'Score based (v3)', 'power-captcha-recaptcha' ); ?> <p class="description">Verify requests with a score</p></label>
+		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v3" <?php checked( 'v3', $captcha_type ); ?> /><?php esc_html_e( 'Score based (v3)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Verify requests with a score', 'power-captcha-recaptcha' ); ?></p></label>
 		<br>
-		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v2" <?php checked( 'v2', $captcha_type ); ?> /><?php esc_html_e( 'Challenge (v2)', 'power-captcha-recaptcha' ); ?> <p class="description">Verify requests with a challenge</p></label>
+		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v2" <?php checked( 'v2', $captcha_type ); ?> /><?php esc_html_e( 'Challenge (v2)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Verify requests with a challenge', 'power-captcha-recaptcha' ); ?></p></label>
 		<br>
 		<fieldset id="fieldset-captcha-v2-type" class="pwrcap-fieldset pwrcap-fieldset--sub" <?php echo ! $captcha_v2_checked ? 'style="display:none;"' : ''; ?>>
-			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2cbx" <?php checked( 'v2cbx', $captcha_v2_type ); ?> /><?php esc_html_e( '"I\'m not a robot" Checkbox', 'power-captcha-recaptcha' ); ?></label>
+			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2cbx" <?php checked( 'v2cbx', $captcha_v2_type ); ?> /><?php esc_html_e( '"I\'m not a robot" Checkbox', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Validate requests with the "I\'m not a robot" checkbox', 'power-captcha-recaptcha' ); ?></p> </label>
 			<br>
-			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2inv" <?php checked( 'v2inv', $captcha_v2_type ); ?> /><?php esc_html_e( 'Invisible reCAPTCHA badge', 'power-captcha-recaptcha' ); ?></label>
+			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2inv" <?php checked( 'v2inv', $captcha_v2_type ); ?> /><?php esc_html_e( 'Invisible reCAPTCHA badge', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Validate requests in the background', 'power-captcha-recaptcha' ); ?></p> </label>
 		</fieldset>
 	</fieldset>
 	<?php
