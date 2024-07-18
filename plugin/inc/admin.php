@@ -437,10 +437,10 @@ function pwrcap_notice_greeting() {
 	$link = admin_url( 'options-general.php?page=pwrcap-settings#tab-general' );
 
 	if ( ! pwrcap_is_setup_complete() ) {
-		$message = __( 'Thank you for installing Power Catcha reCAPTCHA! Complete setup to start protecting your site now.', 'power-captcha-recaptcha' );
+		$message = __( 'Thank you for installing Power Captcha reCAPTCHA! Complete setup to start protecting your site now.', 'power-captcha-recaptcha' );
 		$button  = __( 'Complete Setup', 'power-captcha-recaptcha' );
 	} else {
-		$message = __( 'Thank you for installing Power Catcha reCAPTCHA!', 'power-captcha-recaptcha' );
+		$message = __( 'Thank you for installing Power Captcha reCAPTCHA!', 'power-captcha-recaptcha' );
 		$button  = false;
 	}
 
