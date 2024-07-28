@@ -1,10 +1,10 @@
 === Power Captcha reCAPTCHA ===
 Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
-Tags: captcha, comment reCAPTCHA, google recaptcha, login recaptcha, recaptcha
+Tags: captcha, google recaptcha, comment form, login security, anti-spam security, form protection, woocommerce
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 1.0.4
+Tested up to: 6.6.1
+Stable tag: 1.0.5
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -49,6 +49,19 @@ Power Captcha reCAPTCHA supports 3 Google reCAPTCHA types integrated into 6 comm
 
 == Frequently Asked Questions ==
 
+= How do I use Power Captcha ReCAPTCHA? =
+
+Power Captcha ReCAPTCHA is anti-spam solution that helps you secure forms and stops bots from submitting them.
+After completing setup, on the tab "Captcha" of the settings page, select the forms you want to protect. The captchas will be integrated into the selected forms.
+
+= Do I need to code to implement captchas? =
+
+No coding required. The plugin provides one-click integration for all the supported WordPress and WooCommerce forms.
+
+= The plugin doesn't support some form I need. How can I get support added for them? =
+
+Please, create a new topic with a feature request in [our support forum](https://wordpress.org/support/plugin/power-captcha-recaptcha/).
+
 = Is plugin relying on 3rd party as service? =
 
 Yes. The functionality of the plugin relies on the integration of a third-party service, specifically Google reCAPTCHA, into the WordPress website. For a thorough understanding of the service, including its terms of service and privacy policy, please refer to the official documentation provided at the following link: https://www.google.com/recaptcha/about/.
@@ -84,3 +97,9 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 
 = 1.0.4 (2024-07-18) =
 * Spanish support added.
+
+= 1.0.5 (2024-07-28) =
+* Tested up to 6.6.1
+* Spanish support improved.
+* Readme improved.
+* Minor bug fixed.
