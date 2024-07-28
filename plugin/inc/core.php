@@ -193,18 +193,21 @@ add_action( 'init', 'pwrcap_load_language' );
  * @return bool True if valid.
  */
 function pwrcap_validate_posted_captcha() {
+	$grecaptcha_response = '';
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- not the function's responsibility
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['g-recaptcha-response'] ) ) {
 		$grecaptcha_response = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
 		// phpcs:enable
 	}
 
+	$server_name = null;
 	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	if ( ! empty( $_SERVER['SERVER_NAME'] ) ) {
 		$server_name = $_SERVER['SERVER_NAME'];
 		// phpcs:enable
 	}
 
+	$ip_address = null;
 	if ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
 		$ip_address = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
 	}
