@@ -1,20 +1,31 @@
-# Translation of Plugins - Power Captcha reCAPTCHA - Development (trunk) in Spanish (Spain)
-# This file is distributed under the same license as the Plugins - Power Captcha reCAPTCHA - Development (trunk) package.
+# Translation of Plugins - Power Captcha reCAPTCHA - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Power Captcha reCAPTCHA - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-07-18 17:09:46+0000\n"
+"PO-Revision-Date: 2024-07-20 16:24:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/4.0.1\n"
 "Language: es\n"
-"Project-Id-Version: Plugins - Power Captcha reCAPTCHA - Development (trunk)\n"
+"Project-Id-Version: Plugins - Power Captcha reCAPTCHA - Stable (latest release)\n"
 
-#. Author URI of the plugin
-#: power-captcha-recaptcha.php
-msgid "https://denisaleman.com/"
-msgstr "https://denisaleman.com/"
+#: inc/admin.php:383
+msgid "Validate requests in the background"
+msgstr "Valida las solicitudes en segundo plano"
+
+#: inc/admin.php:381
+msgid "Validate requests with the \"I'm not a robot\" checkbox"
+msgstr "Valida las solicitudes con la casilla de verificación «No soy un robot»"
+
+#: inc/admin.php:378
+msgid "Verify requests with a challenge"
+msgstr "Verifica las solicitudes con un reto"
+
+#: inc/admin.php:376
+msgid "Verify requests with a score"
+msgstr "Verifica las solicitudes con una puntuación"
 
 #: inc/wp/common.php:24
 msgid "WordPress"
@@ -85,7 +96,7 @@ msgstr "Power Captcha: ¡reCAPTCHA aún no está configurado! Completa la config
 
 #: inc/admin.php:443
 msgid "Thank you for installing Power Captcha reCAPTCHA!"
-msgstr ""
+msgstr "¡Gracias por instalar Power Captcha reCAPTCHA!"
 
 #: inc/admin.php:441 inc/admin.php:491
 msgid "Complete Setup"
@@ -93,7 +104,7 @@ msgstr "Completar la configuración"
 
 #: inc/admin.php:440
 msgid "Thank you for installing Power Captcha reCAPTCHA! Complete setup to start protecting your site now."
-msgstr ""
+msgstr "¡Gracias por instalar Power Captcha reCAPTCHA! Completa la configuración para empezar a proteger tu sitio web ahora."
 
 #: inc/admin.php:383
 msgid "Invisible reCAPTCHA badge"
@@ -166,6 +177,11 @@ msgstr "Captchas"
 #: inc/admin.php:31
 msgid "General"
 msgstr "General"
+
+#. Author URI of the plugin
+#: power-captcha-recaptcha.php
+msgid "https://denisaleman.com/"
+msgstr "https://denisaleman.com/"
 
 #. Author of the plugin
 #: power-captcha-recaptcha.php
