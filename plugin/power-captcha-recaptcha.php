@@ -2,12 +2,12 @@
 /**
  * Plugin Name:       Power Captcha reCAPTCHA
  * Plugin URI:        https://wordpress.org/plugins/power-captcha-recaptcha/
- * Version:           1.0.5
+ * Version:           1.0.6
  * Description:       Google reCAPTCHA integration for WordPress and WooCommerce.
  * Author:            Denis Alemán
  * Author URI:        https://denisaleman.com/
  * Requires at least: 5.0
- * Tested up to:      6.6.1
+ * Tested up to:      6.7
  * WC tested up to:   8.9.3
  * Requires PHP:      5.5
  * Text Domain:       power-captcha-recaptcha
@@ -16,7 +16,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package   PowerCaptchaReCaptcha
- * @version   1.0.5
+ * @version   1.0.6
  * @author    Denis Alemán
  * @copyright 2023-2024 Denis Alemán
  * @license   GPL-3.0
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'PWRCAP_VERSION', '1.0.5' );
+define( 'PWRCAP_VERSION', '1.0.6' );
 define( 'PWRCAP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'PWRCAP_PLUGIN_FILE', __FILE__ );
 define( 'PWRCAP_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );

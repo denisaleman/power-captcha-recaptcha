@@ -3,8 +3,8 @@ Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, google recaptcha, comment form, login security, anti-spam security, form protection, woocommerce
 Requires at least: 5.0
-Tested up to: 6.6.1
-Stable tag: 1.0.5
+Tested up to: 6.7
+Stable tag: 1.0.6
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -103,3 +103,6 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 * Spanish support improved.
 * Readme improved.
 * Minor bug fixed.
+
+= 1.0.6 (2024-10-28) =
+* Tested up to 6.7
