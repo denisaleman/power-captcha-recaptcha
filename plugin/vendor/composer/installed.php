@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'denisaleman/pwrcap',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => '8f3e5f16408372ccce99e67b2a71edfeff57d20b',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'denisaleman/pwrcap' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => '8f3e5f16408372ccce99e67b2a71edfeff57d20b',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

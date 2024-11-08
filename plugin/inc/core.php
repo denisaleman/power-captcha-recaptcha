@@ -140,6 +140,9 @@ require_once PWRCAP_DIR . '/inc/woo/lostpassword.php';
 require_once PWRCAP_DIR . '/inc/woo/resetpassword.php';
 require_once PWRCAP_DIR . '/inc/woo/checkout.php';
 
+require_once PWRCAP_DIR . '/inc/cf7/common.php';
+require_once PWRCAP_DIR . '/inc/cf7/cf7.php';
+
 /**
  * Register hooks.
  *
