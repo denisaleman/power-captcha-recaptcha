@@ -180,9 +180,19 @@ function pwrcap_tag_generator_captcha( $contact_form, $options ) { // phpcs:igno
 function pwrcap_captcha_validation_filter( $validation, $tag ) {
 	if ( 'power_captcha_recaptcha' === $tag->basetype ) {
 		if ( $tag->is_required() ) {
-			$is_valid = pwrcap_validate_posted_captcha();
-			if ( ! $is_valid ) {
+			$rest_field_are_valid = $validation->is_valid();
+			$captcha_code         = pwrcap_get_posted_captcha_code();
+
+			if ( empty( $captcha_code ) ) {
 				$validation->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
+				return $validation;
+			}
+
+			if ( $rest_field_are_valid ) {
+				$is_valid = pwrcap_is_valid_captcha_code( $captcha_code );
+				if ( ! $is_valid ) {
+					$validation->invalidate( $tag, __( 'Google reCAPTCHA verification failed.', 'power-captcha-recaptcha' ) );
+				}
 			}
 		}
 	}

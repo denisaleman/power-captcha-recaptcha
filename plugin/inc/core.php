@@ -193,16 +193,62 @@ add_action( 'init', 'pwrcap_load_language' );
  *
  * @since 1.0.0
  *
- * @return bool True if valid.
+ * @return bool True if valid. False if invalid or empty.
  */
 function pwrcap_validate_posted_captcha() {
+	$grecaptcha_response = pwrcap_get_posted_captcha_code();
+
+	if ( ! $grecaptcha_response ) {
+		return false;
+	}
+
+	return pwrcap_is_valid_captcha_code( $grecaptcha_response );
+}
+
+/**
+ * Retrieves the posted CAPTCHA response code from a submitted form.
+ *
+ * This function checks if the request method is POST and then attempts
+ * to retrieve the CAPTCHA code from the specified POST field. If the request
+ * method is not POST, it returns an empty string. The function also sanitizes
+ * the retrieved CAPTCHA code to ensure safe handling.
+ *
+ * @since 1.0.9
+ *
+ * @param string $key Optional. The key of the CAPTCHA response in the POST data.
+ *                    Defaults to 'g-recaptcha-response'.
+ *
+ * @return string The sanitized CAPTCHA response code if available, or an empty
+ *                string if the request method is not POST or the CAPTCHA field
+ *                is not set.
+ */
+function pwrcap_get_posted_captcha_code( $key = 'g-recaptcha-response' ) {
 	$grecaptcha_response = '';
+
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- not the function's responsibility
-	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['g-recaptcha-response'] ) ) {
-		$grecaptcha_response = sanitize_text_field( wp_unslash( $_POST['g-recaptcha-response'] ) );
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		return '';
+	}
+
+	if ( isset( $_POST[ $key ] ) && ! empty( $_POST[ $key ] ) ) {
+		$grecaptcha_response = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
 		// phpcs:enable
 	}
 
+	return $grecaptcha_response;
+}
+
+
+/**
+ * Check if captcha code is valid.
+ *
+ * @since 1.0.9
+ *
+ * @param string $captcha_code Captcha code.
+ *
+ * @return bool True if valid.
+ */
+function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	$server_name = null;
 	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	if ( ! empty( $_SERVER['SERVER_NAME'] ) ) {
@@ -226,7 +272,7 @@ function pwrcap_validate_posted_captcha() {
 	 * @todo phpcs:ignore Generic.Commenting.Todo.CommentFound
 	 */
 
-	$response = $recaptcha->setExpectedHostname( $server_name )->verify( $grecaptcha_response, $ip_address );
+	$response = $recaptcha->setExpectedHostname( $server_name )->verify( $captcha_code, $ip_address );
 	$response = apply_filters( 'pwrcap_verification_response', $response );
 
 	return (bool) $response->isSuccess();

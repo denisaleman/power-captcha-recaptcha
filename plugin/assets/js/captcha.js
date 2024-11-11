@@ -17,27 +17,28 @@ function pwrcapGetLocalizedSettings() {
 function pwrcapRenderV2cbx($container, fitToContainer = false) {
   var settings = pwrcapGetLocalizedSettings();
   var holderId = grecaptcha.render($container, {
-    'sitekey' : settings.site_key,
+    'sitekey'  : settings.site_key,
+    'callback' : function() { 
+      /**
+       * @todo make an event instead of direct call
+       */
+      pwrcapCf7VerifyCallback($container, holderId);
+    },
   });
   if(fitToContainer) {
     var scaleFactor = $container.clientWidth / $container.children[0].clientWidth;
     $container.style.transform = 'scale('+scaleFactor+')';
   }
+}
 
-  /**
-   * Reset recaptcha on cf7 submit
-   */
-  var wpcf7Elements = document.querySelectorAll( '.wpcf7' );
-  if(wpcf7Elements.length > 0) {
-    wpcf7Elements.forEach( function (wpcf7Elm) {
-	  if (wpcf7Elm.contains($container)) {
-		  wpcf7Elm.addEventListener('wpcf7submit', (function(id) {
-			  return function(event) {
-				  grecaptcha.reset(id);
-				};
-			})(holderId), false);
-		}
-	  });
+function pwrcapCf7VerifyCallback($container, holderId) {
+  const formControl = $container.closest('.wpcf7-form-control');
+  
+  if (formControl) {
+      const validationTip = formControl.querySelector('.wpcf7-not-valid-tip');
+      if (validationTip) {
+          validationTip.remove();
+      }
   }
 }
 
