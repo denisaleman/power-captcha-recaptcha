@@ -3,8 +3,8 @@ Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, google recaptcha, comment form, login security, anti-spam security, form protection, woocommerce
 Requires at least: 5.0
-Tested up to: 6.7
-Stable tag: 1.0.7
+Tested up to: 6.6.1
+Stable tag: 1.0.8
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -114,3 +114,5 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 = 1.0.7 (2024-11-08) =
 * Added Contact Form 7 integration.
 
+= 1.0.8 (2024-11-11) =
+* Added reCAPTHA reset on submit for Contact Form 7.

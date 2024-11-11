@@ -16,12 +16,28 @@ function pwrcapGetLocalizedSettings() {
 
 function pwrcapRenderV2cbx($container, fitToContainer = false) {
   var settings = pwrcapGetLocalizedSettings();
-  grecaptcha.render($container, {
+  var holderId = grecaptcha.render($container, {
     'sitekey' : settings.site_key,
   });
   if(fitToContainer) {
     var scaleFactor = $container.clientWidth / $container.children[0].clientWidth;
     $container.style.transform = 'scale('+scaleFactor+')';
+  }
+
+  /**
+   * Reset recaptcha on cf7 submit
+   */
+  var wpcf7Elements = document.querySelectorAll( '.wpcf7' );
+  if(wpcf7Elements.length > 0) {
+    wpcf7Elements.forEach( function (wpcf7Elm) {
+	  if (wpcf7Elm.contains($container)) {
+		  wpcf7Elm.addEventListener('wpcf7submit', (function(id) {
+			  return function(event) {
+				  grecaptcha.reset(id);
+				};
+			})(holderId), false);
+		}
+	  });
   }
 }
 
