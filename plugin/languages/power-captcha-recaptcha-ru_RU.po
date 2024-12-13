@@ -1,0 +1,234 @@
+# Translation of Plugins - Power Captcha reCAPTCHA - Development (trunk) in Russian
+# This file is distributed under the same license as the Plugins - Power Captcha reCAPTCHA - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-12-13 19:27:45+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - Power Captcha reCAPTCHA - Development (trunk)\n"
+
+#: inc/cf7/common.php:65
+msgid "The Contact Form 7 plugin is not installed or is deactivated."
+msgstr "Плагин Contact Form 7 не установлен или деактивирован."
+
+#: inc/cf7/common.php:59
+msgid "Edit each form where you want to add Power Captcha ReCAPTCHA, and insert the field as you would with any other form field."
+msgstr "Отредактируйте каждую форму, в которую вы хотите добавить Power Captcha ReCAPTCHA, и вставьте поле так же, как и в любое другое поле формы."
+
+#. translators: 1: link open, 2: link close
+#: inc/cf7/common.php:52
+msgid "To use Power Captcha ReCAPTCHA in Contact Form 7, go to the %1$sContact Forms 7 section%2$s."
+msgstr "Для использования Power Captcha ReCAPTCHA с Contact Form 7, перейдите к разделу %1$sContact Forms 7%2$s."
+
+#: inc/cf7/common.php:22
+msgid "Contact Forms 7"
+msgstr "Contact Forms 7"
+
+#: inc/cf7/cf7.php:140
+msgid "Generates a form-tag for a Power Captcha ReCaptcha field."
+msgstr "Создает form-tag для поля Power Captcha ReCaptcha."
+
+#: inc/cf7/cf7.php:139
+msgid "Power Captcha ReCaptcha form-tag generator"
+msgstr "Power Captcha ReCaptcha form-tag генератор"
+
+#: inc/cf7/cf7.php:41
+msgid "power captcha reCaptcha"
+msgstr "power captcha reCaptcha"
+
+#: inc/admin.php:383
+msgid "Validate requests in the background"
+msgstr "Выполнять проверку запросов в фоновом режиме"
+
+#: inc/admin.php:381
+msgid "Validate requests with the \"I'm not a robot\" checkbox"
+msgstr "Выполнять проверку запросов с помощью флажка \"Я не робот\""
+
+#: inc/admin.php:378
+msgid "Verify requests with a challenge"
+msgstr "Проверка запросов с помощью заданий"
+
+#: inc/admin.php:376
+msgid "Verify requests with a score"
+msgstr "Выполнять проверку запросов с учетом оценок"
+
+#. Author URI of the plugin
+#: power-captcha-recaptcha.php
+msgid "https://denisaleman.com/"
+msgstr "https://denisaleman.com/"
+
+#: inc/wp/common.php:24
+msgid "WordPress"
+msgstr "WordPress"
+
+#: inc/woo/review.php:141 inc/wp/comment.php:117
+msgid "Comment Form"
+msgstr "Форма комментариев"
+
+#: inc/woo/resetpassword.php:120 inc/wp/resetpassword.php:96
+msgid "Reset Password Form"
+msgstr "Форма сброса пароля"
+
+#: inc/woo/register.php:103 inc/wp/register.php:94
+msgid "Register Form"
+msgstr "Форма регистрации"
+
+#: inc/woo/lostpassword.php:115 inc/wp/lostpassword.php:91
+msgid "Lost Password Form"
+msgstr "Форма восстановления пароля"
+
+#: inc/woo/login.php:122 inc/wp/login.php:95
+msgid "Login Form"
+msgstr "Форма входа"
+
+#: inc/woo/login.php:36 inc/woo/login.php:39 inc/woo/review.php:38
+#: inc/woo/review.php:48 inc/wp/comment.php:37 inc/wp/comment.php:47
+#: inc/wp/login.php:29 inc/wp/login.php:32 inc/wp/lostpassword.php:28
+#: inc/wp/lostpassword.php:31 inc/wp/register.php:29 inc/wp/register.php:32
+msgid "ERROR:"
+msgstr "ОШИБКА:"
+
+#: inc/woo/common.php:26
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: inc/woo/checkout.php:94
+msgid "Checkout Form"
+msgstr "Форма оформления заказа"
+
+#: inc/cf7/cf7.php:194 inc/woo/checkout.php:28 inc/woo/checkout.php:31
+#: inc/woo/login.php:36 inc/woo/login.php:39 inc/woo/lostpassword.php:36
+#: inc/woo/lostpassword.php:39 inc/woo/register.php:30 inc/woo/register.php:33
+#: inc/woo/resetpassword.php:36 inc/woo/resetpassword.php:39
+#: inc/woo/review.php:38 inc/woo/review.php:48 inc/wp/comment.php:37
+#: inc/wp/comment.php:47 inc/wp/login.php:29 inc/wp/login.php:32
+#: inc/wp/lostpassword.php:28 inc/wp/lostpassword.php:31 inc/wp/register.php:29
+#: inc/wp/register.php:32 inc/wp/resetpassword.php:35
+msgid "Google reCAPTCHA verification failed."
+msgstr "Проверка Google reCAPTCHA не прошла."
+
+#: inc/core.php:175
+msgid "Settings"
+msgstr "Настройки"
+
+#. translators: 1: link open, 2: link close
+#: inc/admin.php:564 inc/cf7/cf7.php:123
+msgid "Complete setup to start using reCAPTCHA. %1$sComplete setup »%2$s "
+msgstr "Завершите настройку, чтобы начать использовать reCAPTCHA. %1$sЗавершить настройку »%2$s "
+
+#. translators: 1: link open, 2: link close, 3: line break
+#: inc/admin.php:561
+msgid "To start using reCAPTCHA, complete setup: %1$ssign up in Google reCAPTCHA%2$s for keys. Fill in site key and secret key bellow."
+msgstr "Чтобы начать использовать reCAPTCHA, завершите настройку: %1$sзарегистрируйтесь в Google reCAPTCHA%2$s для получения ключей. Заполните ключ сайта и секретный ключ ниже."
+
+#: inc/admin.php:489
+msgid "Power Captcha: reCAPTCHA is still not configured! Complete setup to start protecting your site now."
+msgstr "Power Captcha: reCAPTCHA еще не настроен! Завершите настройку, чтобы начать защищать ваш сайт сейчас."
+
+#: inc/admin.php:443
+msgid "Thank you for installing Power Captcha reCAPTCHA!"
+msgstr "Спасибо за установку Power Captcha reCAPTCHA!"
+
+#: inc/admin.php:441 inc/admin.php:491 inc/cf7/cf7.php:125
+msgid "Complete Setup"
+msgstr "Завершить настройку"
+
+#: inc/admin.php:440
+msgid "Thank you for installing Power Captcha reCAPTCHA! Complete setup to start protecting your site now."
+msgstr "Спасибо за установку Power Captcha reCAPTCHA! Завершите настройку, чтобы начать защищать ваш сайт сейчас."
+
+#: inc/admin.php:383
+msgid "Invisible reCAPTCHA badge"
+msgstr "Невидимый значок reCAPTCHA"
+
+#: inc/admin.php:381
+msgid "\"I'm not a robot\" Checkbox"
+msgstr "Флажок \"Я не робот\""
+
+#: inc/admin.php:378
+msgid "Challenge (v2)"
+msgstr "С помощью заданий (v2)"
+
+#: inc/admin.php:376
+msgid "Score based (v3)"
+msgstr "С использованием оценок (v3)"
+
+#: inc/admin.php:241
+msgid "Debug Mode"
+msgstr "Режим отладки"
+
+#: inc/admin.php:226
+msgid "Secret Key"
+msgstr "Секретный ключ"
+
+#: inc/admin.php:225
+msgid "Site Key"
+msgstr "Ключ сайта"
+
+#: inc/admin.php:224
+msgid "reCAPTCHA Type"
+msgstr "Тип reCAPTCHA"
+
+#: inc/admin.php:215
+msgid "Setup"
+msgstr "Настройка"
+
+#: inc/admin.php:196
+msgid "Output captcha verification response to the browser console."
+msgstr "Выводить ответ проверки капчи в консоль браузера."
+
+#: inc/admin.php:131 inc/cf7/cf7.php:138
+msgid "Power Captcha"
+msgstr "Power Captcha"
+
+#: inc/admin.php:107
+msgid "reCAPTCHA Admin Console"
+msgstr "Консоль администратора reCAPTCHA"
+
+#: inc/admin.php:106
+msgid "About Google reCAPTCHA"
+msgstr "О Google reCAPTCHA"
+
+#: inc/admin.php:104
+msgid "Google reCAPTCHA"
+msgstr "Google reCAPTCHA"
+
+#: inc/admin.php:45 inc/admin.php:64 inc/admin.php:83
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: inc/admin.php:33 inc/admin.php:230
+msgid "Misc"
+msgstr "Дополнительно"
+
+#: inc/admin.php:32
+msgid "Captchas"
+msgstr "Капчи"
+
+#: inc/admin.php:31
+msgid "General"
+msgstr "Общие"
+
+#. Author of the plugin
+#: power-captcha-recaptcha.php
+msgid "Denis Alemán"
+msgstr "Denis Alemán"
+
+#. Description of the plugin
+#: power-captcha-recaptcha.php
+msgid "Google reCAPTCHA integration for WordPress and WooCommerce."
+msgstr "Интеграция Google reCAPTCHA для WordPress и WooCommerce."
+
+#. Plugin URI of the plugin
+#: power-captcha-recaptcha.php
+msgid "https://wordpress.org/plugins/power-captcha-recaptcha/"
+msgstr "https://ru.wordpress.org/plugins/power-captcha-recaptcha/"
+
+#. Plugin Name of the plugin
+#: power-captcha-recaptcha.php inc/admin.php:131
+msgid "Power Captcha reCAPTCHA"
+msgstr "Power Captcha reCAPTCHA"
