@@ -48,7 +48,12 @@ function pwrcap_register_form_add_handler() {
 		return;
 	}
 
-	add_filter( 'registration_errors', 'pwrcap_handle_register_form' );
+	add_action(
+		'login_form_register',
+		function() {
+			add_filter( 'registration_errors', 'pwrcap_handle_register_form' );
+		}
+	);
 }
 add_action( 'pwrcap_add_captcha_handler', 'pwrcap_register_form_add_handler' );
 

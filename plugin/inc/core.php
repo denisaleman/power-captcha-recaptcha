@@ -143,6 +143,8 @@ require_once PWRCAP_DIR . '/inc/woo/checkout.php';
 require_once PWRCAP_DIR . '/inc/cf7/common.php';
 require_once PWRCAP_DIR . '/inc/cf7/cf7.php';
 
+require_once PWRCAP_DIR . '/inc/activity/activity.php';
+
 /**
  * Register hooks.
  *
@@ -151,6 +153,8 @@ require_once PWRCAP_DIR . '/inc/cf7/cf7.php';
  * @return void
  */
 function pwrcap_init() {
+	do_action( 'pwrcap_init' );
+
 	if ( true !== pwrcap_is_setup_complete() ) {
 		return;
 	}
@@ -196,13 +200,9 @@ add_action( 'init', 'pwrcap_load_language' );
  * @return bool True if valid. False if invalid or empty.
  */
 function pwrcap_validate_posted_captcha() {
-	$grecaptcha_response = pwrcap_get_posted_captcha_code();
+	$grecaptcha_code = pwrcap_get_posted_captcha_code();
 
-	if ( ! $grecaptcha_response ) {
-		return false;
-	}
-
-	return pwrcap_is_valid_captcha_code( $grecaptcha_response );
+	return pwrcap_is_valid_captcha_code( $grecaptcha_code );
 }
 
 /**
@@ -249,6 +249,16 @@ function pwrcap_get_posted_captcha_code( $key = 'g-recaptcha-response' ) {
  * @return bool True if valid.
  */
 function pwrcap_is_valid_captcha_code( $captcha_code ) {
+	if ( ! $captcha_code ) {
+		/**
+		 * Fires if captcha code is an empty string or has not been sent through the form.
+		 *
+		 * @since 1.0.11
+		 */
+		do_action( 'pwrcap_no_captcha_code_sent' );
+		return false;
+	}
+
 	$server_name = null;
 	// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	if ( ! empty( $_SERVER['SERVER_NAME'] ) ) {

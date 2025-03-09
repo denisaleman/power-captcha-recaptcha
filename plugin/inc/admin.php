@@ -28,69 +28,11 @@ function pwrcap_options_page() {
 				<div id="post-body-content">
 
 					<div class="nav-tab-wrapper pwrcap-nav-tab-wrapper">
-						<a href="#tab-general" class="nav-tab nav-tab-active"><?php esc_html_e( 'General', 'power-captcha-recaptcha' ); ?></a>
-						<a href="#tab-captchas" class="nav-tab"><?php esc_html_e( 'Captchas', 'power-captcha-recaptcha' ); ?></a>
-						<a href="#tab-misc" class="nav-tab"><?php esc_html_e( 'Misc', 'power-captcha-recaptcha' ); ?></a>
+						<?php do_action( 'pwrcap_admin_do_tab_navigation' ); ?>
 					</div><!-- .tab-wrapper -->
 
 					<div class="tabs-stage">
-						<div id="tab-general" style="display: block;" class="pwrcap-tab-content meta-box-sortables ui-sortable">
-							<div class="postbox">
-								<div class="inside">
-									<form class="pwrcap_settings_form" action="options.php" method="post">
-										<?php settings_fields( 'pwrcap_general_group' ); ?>
-										<?php do_settings_sections( 'pwrcap_general_group' ); ?>
-										<?php
-										submit_button(
-											esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
-											'primary pwrcap-sumbit-button',
-											'submit',
-											false
-										);
-										?>
-									</form>
-								</div><!-- .inside -->
-							</div><!-- .postbox -->
-						</div><!-- .meta-box-sortables -->
-
-						<div id="tab-captchas" class="pwrcap-tab-content meta-box-sortables ui-sortable">
-							<div class="postbox">
-								<div class="inside">
-									<form class="pwrcap_settings_form" action="options.php" method="post">
-										<?php settings_fields( 'pwrcap_captchas_group' ); ?>
-										<?php do_settings_sections( 'pwrcap_captchas_group' ); ?>
-										<?php
-										submit_button(
-											esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
-											'primary pwrcap-sumbit-button',
-											'submit',
-											false
-										);
-										?>
-									</form>
-								</div><!-- .inside -->
-							</div><!-- .postbox -->
-						</div><!-- .meta-box-sortables -->
-
-						<div id="tab-misc" class="pwrcap-tab-content meta-box-sortables ui-sortable">
-							<div class="postbox">
-								<div class="inside">
-									<form class="pwrcap_settings_form" action="options.php" method="post">
-										<?php settings_fields( 'pwrcap_misc_group' ); ?>
-										<?php do_settings_sections( 'pwrcap_misc_group' ); ?>
-										<?php
-										submit_button(
-											esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
-											'primary pwrcap-sumbit-button',
-											'submit',
-											false
-										);
-										?>
-									</form>
-								</div><!-- .inside -->
-							</div><!-- .postbox -->
-						</div><!-- .meta-box-sortables -->
-
+						<?php do_action( 'pwrcap_admin_do_tab_stage' ); ?>
 					</div><!-- .tabs-stage -->
 
 
@@ -119,6 +61,141 @@ function pwrcap_options_page() {
 	</div><!-- .wrap -->
 	<?php
 }
+
+/**
+ * Print a link for the General tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_general_tab_link() {
+	?>
+	<a href="#tab-general" class="nav-tab nav-tab-active"><?php esc_html_e( 'General', 'power-captcha-recaptcha' ); ?></a>
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_navigation', 'pwrcap_print_general_tab_link', 10 );
+
+/**
+ * Print content for the general tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_general_tab_content() {
+	?>
+	<div id="tab-general" style="display: block;" class="pwrcap-tab-content meta-box-sortables ui-sortable">
+		<div class="postbox">
+			<div class="inside">
+				<form class="pwrcap_settings_form" action="options.php" method="post">
+					<?php settings_fields( 'pwrcap_general_group' ); ?>
+					<?php do_settings_sections( 'pwrcap_general_group' ); ?>
+					<?php
+					submit_button(
+						esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
+						'primary pwrcap-sumbit-button',
+						'submit',
+						false
+					);
+					?>
+				</form>
+			</div><!-- .inside -->
+		</div><!-- .postbox -->
+	</div><!-- .meta-box-sortables -->
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_stage', 'pwrcap_print_general_tab_content', 10 );
+
+/**
+ * Print a link for the captchas tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_captchas_tab_link() {
+	?>
+	<a href="#tab-captchas" class="nav-tab"><?php esc_html_e( 'Captchas', 'power-captcha-recaptcha' ); ?></a>
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_navigation', 'pwrcap_print_captchas_tab_link', 20 );
+
+/**
+ * Print content for the captchas tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_captchas_tab_content() {
+	?>
+	<div id="tab-captchas" class="pwrcap-tab-content meta-box-sortables ui-sortable">
+		<div class="postbox">
+			<div class="inside">
+				<form class="pwrcap_settings_form" action="options.php" method="post">
+					<?php settings_fields( 'pwrcap_captchas_group' ); ?>
+					<?php do_settings_sections( 'pwrcap_captchas_group' ); ?>
+					<?php
+					submit_button(
+						esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
+						'primary pwrcap-sumbit-button',
+						'submit',
+						false
+					);
+					?>
+				</form>
+			</div><!-- .inside -->
+		</div><!-- .postbox -->
+	</div><!-- .meta-box-sortables -->
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_stage', 'pwrcap_print_captchas_tab_content', 20 );
+
+/**
+ * Print a link for the captchas tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_misc_tab_link() {
+	?>
+	<a href="#tab-misc" class="nav-tab"><?php esc_html_e( 'Misc', 'power-captcha-recaptcha' ); ?></a>
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_navigation', 'pwrcap_print_misc_tab_link', 30 );
+
+/**
+ * Print content for the captchas tab in admin navigation.
+ *
+ * @since 1.0.11
+ *
+ * @return void
+ */
+function pwrcap_print_misc_tab_content() {
+	?>
+	<div id="tab-misc" class="pwrcap-tab-content meta-box-sortables ui-sortable">
+		<div class="postbox">
+			<div class="inside">
+				<form class="pwrcap_settings_form" action="options.php" method="post">
+					<?php settings_fields( 'pwrcap_misc_group' ); ?>
+					<?php do_settings_sections( 'pwrcap_misc_group' ); ?>
+					<?php
+					submit_button(
+						esc_html__( 'Save Changes', 'default' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch 
+						'primary pwrcap-sumbit-button',
+						'submit',
+						false
+					);
+					?>
+				</form>
+			</div><!-- .inside -->
+		</div><!-- .postbox -->
+	</div><!-- .meta-box-sortables -->
+	<?php
+}
+add_action( 'pwrcap_admin_do_tab_stage', 'pwrcap_print_misc_tab_content', 30 );
 
 /**
  * Register menu page.
@@ -373,14 +450,14 @@ function pwrcap_field_captcha_type() {
 	$captcha_v2_checked = ( 'v2' === $captcha_type ) ? true : false;
 	?>
 	<fieldset>
-		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v3" <?php checked( 'v3', $captcha_type ); ?> /><?php esc_html_e( 'Score based (v3)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Verify requests with a score', 'power-captcha-recaptcha' ); ?></p></label>
+		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v3" <?php checked( 'v3', $captcha_type ); ?> /><?php esc_html_e( 'Score based (v3)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php esc_html_e( 'Verify requests with a score', 'power-captcha-recaptcha' ); ?></p></label>
 		<br>
-		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v2" <?php checked( 'v2', $captcha_type ); ?> /><?php esc_html_e( 'Challenge (v2)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Verify requests with a challenge', 'power-captcha-recaptcha' ); ?></p></label>
+		<label><input class="captcha-type-radio" type="radio" name="pwrcap_general_options[captcha_type]" value="v2" <?php checked( 'v2', $captcha_type ); ?> /><?php esc_html_e( 'Challenge (v2)', 'power-captcha-recaptcha' ); ?> <p class="description"><?php esc_html_e( 'Verify requests with a challenge', 'power-captcha-recaptcha' ); ?></p></label>
 		<br>
 		<fieldset id="fieldset-captcha-v2-type" class="pwrcap-fieldset pwrcap-fieldset--sub" <?php echo ! $captcha_v2_checked ? 'style="display:none;"' : ''; ?>>
-			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2cbx" <?php checked( 'v2cbx', $captcha_v2_type ); ?> /><?php esc_html_e( '"I\'m not a robot" Checkbox', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Validate requests with the "I\'m not a robot" checkbox', 'power-captcha-recaptcha' ); ?></p> </label>
+			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2cbx" <?php checked( 'v2cbx', $captcha_v2_type ); ?> /><?php esc_html_e( '"I\'m not a robot" Checkbox', 'power-captcha-recaptcha' ); ?> <p class="description"><?php esc_html_e( 'Validate requests with the "I\'m not a robot" checkbox', 'power-captcha-recaptcha' ); ?></p> </label>
 			<br>
-			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2inv" <?php checked( 'v2inv', $captcha_v2_type ); ?> /><?php esc_html_e( 'Invisible reCAPTCHA badge', 'power-captcha-recaptcha' ); ?> <p class="description"><?php _e( 'Validate requests in the background', 'power-captcha-recaptcha' ); ?></p> </label>
+			<label><input class="captcha-v2-type-radio" type="radio" name="pwrcap_general_options[captcha_v2_type]" value="v2inv" <?php checked( 'v2inv', $captcha_v2_type ); ?> /><?php esc_html_e( 'Invisible reCAPTCHA badge', 'power-captcha-recaptcha' ); ?> <p class="description"><?php esc_html_e( 'Validate requests in the background', 'power-captcha-recaptcha' ); ?></p> </label>
 		</fieldset>
 	</fieldset>
 	<?php

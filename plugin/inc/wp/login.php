@@ -48,7 +48,7 @@ function pwrcap_login_form_add_handler() {
 		return;
 	}
 
-	add_filter( 'wp_authenticate_user', 'pwrcap_handle_login_form', 10, 1 );
+	add_filter( 'authenticate', 'pwrcap_handle_login_form', 30, 1 );
 }
 add_action( 'pwrcap_add_captcha_handler', 'pwrcap_login_form_add_handler' );
 
