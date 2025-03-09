@@ -3,8 +3,8 @@ Contributors: denisaleman
 Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, google recaptcha, comment form, login security, anti-spam security, form protection, woocommerce
 Requires at least: 5.0
-Tested up to: 6.6.1
-Stable tag: 1.0.10
+Tested up to: 6.8.0
+Stable tag: 1.1.0
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -42,6 +42,10 @@ Power Captcha reCAPTCHA supports 3 Google reCAPTCHA types integrated into 6 comm
 == Contact Form 7 ==
 
 As of version 1.0.7, Power Captcha reCAPTCHA integrates with Contact Form 7. You can easily add the Power Captcha reCAPTCHA field to your Contact Form 7 forms.
+
+== Activity Report ==
+
+The Activity Report feature for the plugin provides users with a detailed overview of captcha interactions. It tracks and displays the number of solved, failed, and empty captchas, offering a daily breakdown to monitor performance trends. Stay informed with clear insights into your captcha performance.
 
 == Installation ==
 
@@ -123,3 +127,9 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 = 1.0.10 (2024-12-13) =
 * Added Russian translations.
 * WooCommerce tested up to 9.4.3
+
+= 1.1.0 (2025-03-09) =
+* Tested up to 6.8.0
+* WooCommerce tested up to 9.7.1
+* Added captcha activity report feature.
+* Fixed minor bugs.
