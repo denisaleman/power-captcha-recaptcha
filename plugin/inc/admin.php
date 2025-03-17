@@ -432,8 +432,8 @@ function pwrcap_load_admin_scripts( $hook ) {
 
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_enqueue_style( 'pwrcap-admin-style', PWRCAP_URL . '/assets/css/admin' . $min . '.css', array(), PWRCAP_VERSION );
-	wp_enqueue_script( 'pwrcap-admin-script', PWRCAP_URL . '/assets/js/admin' . $min . '.js', array( 'jquery' ), PWRCAP_VERSION, true );
+	wp_enqueue_style( 'pwrcap-admin-style', PWRCAP_URL . '/assets/dist/css/admin' . $min . '.css', array(), PWRCAP_VERSION );
+	wp_enqueue_script( 'pwrcap-admin-script', PWRCAP_URL . '/assets/dist/js/admin' . $min . '.js', array( 'jquery' ), PWRCAP_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'pwrcap_load_admin_scripts' );
 
@@ -615,7 +615,7 @@ add_action( 'wp_ajax_pwrcap_dismiss_notice_not_configured', 'pwrcap_dismiss_noti
 function pwrcap_load_notice_script() {
 	$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_enqueue_script( 'pwrcap-notice-script', PWRCAP_URL . '/assets/js/notice' . $min . '.js', array( 'jquery' ), PWRCAP_VERSION, true );
+	wp_enqueue_script( 'pwrcap-notice-script', PWRCAP_URL . '/assets/dist/js/notice' . $min . '.js', array( 'jquery' ), PWRCAP_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'pwrcap_load_notice_script' );
 

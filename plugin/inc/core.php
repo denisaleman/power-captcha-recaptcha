@@ -51,7 +51,7 @@ function pwrcap_load_frontend() {
 
 	$site_key = pwrcap_option( 'general', 'site_key' );
 
-	wp_enqueue_script( 'pwrcap-captcha', PWRCAP_URL . '/assets/js/captcha' . $min . '.js', array(), PWRCAP_VERSION, false );
+	wp_enqueue_script( 'pwrcap-captcha', PWRCAP_URL . '/assets/dist/js/captcha' . $min . '.js', array(), PWRCAP_VERSION, false );
 	wp_localize_script(
 		'pwrcap-captcha',
 		'pwrcap',
@@ -64,7 +64,7 @@ function pwrcap_load_frontend() {
 		wp_enqueue_script( 'pwrcap-api', $api_url, array(), PWRCAP_VERSION, false );
 	}
 
-	wp_enqueue_style( 'pwrcap-style', PWRCAP_URL . '/assets/css/captcha' . $min . '.css', array(), PWRCAP_VERSION );
+	wp_enqueue_style( 'pwrcap-style', PWRCAP_URL . '/assets/dist/css/captcha' . $min . '.css', array(), PWRCAP_VERSION );
 }
 add_action( 'login_enqueue_scripts', 'pwrcap_load_frontend' );
 add_action( 'wp_enqueue_scripts', 'pwrcap_load_frontend' );
