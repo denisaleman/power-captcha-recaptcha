@@ -282,8 +282,25 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	 * @todo phpcs:ignore Generic.Commenting.Todo.CommentFound
 	 */
 
-	$response = $recaptcha->setExpectedHostname( $server_name )->verify( $captcha_code, $ip_address );
-	$response = apply_filters( 'pwrcap_verification_response', $response );
+
+	/**
+	 * Filters the expected hostname used during server-side reCAPTCHA verification.
+	 *
+	 * By default, the plugin validates that the hostname returned by Google's
+	 * verification service matches the current server hostname. This provides an
+	 * additional security check beyond the standard reCAPTCHA verification.
+	 *
+	 * This filter allows developers to override the expected hostname. A common
+	 * use case is automated testing with Google's official test keys, which always
+	 * return the hostname `testkey.google.com` instead of the actual site hostname.
+	 *
+	 * @since 1.1.1
+	 *
+	 * @param string $expected_hostname The expected hostname. Defaults to the current server hostname.
+	 */
+	$expected_hostname = apply_filters( 'pwrcap_recaptcha_expected_hostname', $server_name );
+	$response          = $recaptcha->setExpectedHostname( $expected_hostname )->verify( $captcha_code, $ip_address );
+	$response          = apply_filters( 'pwrcap_verification_response', $response );
 
 	return (bool) $response->isSuccess();
 }
