@@ -294,7 +294,7 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	 * use case is automated testing with Google's official test keys, which always
 	 * return the hostname `testkey.google.com` instead of the actual site hostname.
 	 *
-	 * @since 1.1.1
+	 * @since 1.2.0
 	 *
 	 * @param string $expected_hostname The expected hostname. Defaults to the current server hostname.
 	 */
