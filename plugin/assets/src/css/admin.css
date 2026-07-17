@@ -2,13 +2,21 @@
   border-bottom: none;
   z-index: 99;
   position: relative;
+  top: 1px;
 }
 
 .nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab {
   margin-left: 0;
   margin-right: .5em;
   border: 1px solid #c3c4c7;
-  border-bottom: none;
+}
+
+.nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab:hover {
+  background-color: #e5e5e5;
+}
+
+.nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab:hover:focus {
+  background-color: #fff;
 }
 
 .nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab-active {
