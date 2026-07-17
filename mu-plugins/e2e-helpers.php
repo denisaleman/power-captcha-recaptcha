@@ -6,9 +6,11 @@ function add_test_environment_meta_tag() {
 add_action('wp_head', 'add_test_environment_meta_tag');
 
 function e2e_provide_google_test_key_hostname( $hostname ) {
-    if ( ! isset( $_COOKIE['pwrcap-e2e-test'] ) || $_COOKIE['pwrcap-e2e-test'] !== '1' ) {
-        return $hostname;
-    }
+	$plugin_options = wp_parse_args( (array) get_option( 'pwrcap_general_options' ), pwrcap_get_options_defaults( 'general' ) );
+
+	if ( $plugin_options['site_key'] !== '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' || $plugin_options['secret_key'] !== '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' ) {
+		return $hostname;
+	}
 
     return "testkey.google.com";
 }
