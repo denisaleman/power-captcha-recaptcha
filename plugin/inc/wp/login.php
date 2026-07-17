@@ -22,6 +22,10 @@ function pwrcap_handle_login_form( $user ) {
 		return $user;
 	}
 
+	if ( ! isset( $_POST['wp-submit'] ) ) {
+		return $user;
+	}
+
 	do_action( 'pwrcap_before_handle_captcha', __FUNCTION__ );
 
 	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] && isset( $_POST['g-recaptcha-response'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -34,7 +38,6 @@ function pwrcap_handle_login_form( $user ) {
 
 	return $user;
 }
-
 /**
  * Add login form handler.
  *
