@@ -143,6 +143,86 @@ Examples:
 
 This helps maintain a clean, readable commit history and enables automated changelog generation.
 
+## Release Process
+
+This repository uses [semantic-release](https://semantic-release.gitbook.io/semantic-release/) for automated version management and publishing. Releases are triggered automatically when commits are pushed to the `master` branch following the Conventional Commits specification.
+
+### How Releases Work
+
+1. **Development**: Developers make commits using conventional commit types (feat, fix, docs, etc.)
+2. **CI Trigger**: When commits are pushed to `master`, GitHub Actions runs the release workflow
+3. **Version Calculation**: semantic-release analyzes commits since last release to determine the next version number
+4. **Changelog Generation**: Release notes are automatically generated from commit messages
+5. **Version Updates**: All version references in the plugin are updated automatically
+6. **GitHub Release**: A GitHub release is created with the updated plugin as a downloadable ZIP
+7. **Tag Creation**: A Git tag is created for the release version
+8. **Commit Back**: Updated version files are committed back to the repository
+
+### Performing a Release
+
+Releases are fully automated - no manual steps are required. Simply:
+1. Ensure your commits follow [Conventional Commits](https://www.conventionalcommits.org/)
+2. Push to the `main` or `master` branch
+3. The CI system will automatically:
+   - Calculate the next version number
+   - Generate release notes
+   - Update all version references
+   - Create a Git tag
+   - Publish a GitHub release
+   - Commit the updated version files back to the repository
+
+### Recovering from a Failed Release
+
+If a release fails:
+
+1. **Check the Actions tab** in GitHub for error details
+2. **Fix the issue** (may require fixing commit messages, permissions, etc.)
+3. **Re-trigger the workflow**:
+   - If the failure was before a tag was created: simply push new commits to trigger a new attempt
+   - If a tag was created but release failed: delete the tag locally and remotely, then push again
+     ```bash
+     # Delete local tag
+     git tag -d vX.Y.Z
+     # Delete remote tag
+     git push origin --delete vX.Y.Z
+     # Push commits again to trigger new release attempt
+     git push
+     ```
+4. **Manual recovery** (only if absolutely necessary):
+   - Follow the manual version update process documented in RELEASE.md
+   - Commit the changes with `[skip ci]` to avoid triggering another release
+   - Create the git tag manually
+   - Push the tag to trigger a release
+
+### Release Configuration
+
+The release process is configured via:
+- `.releaserc.js` - semantic-release configuration
+- `.github/workflows/release.yml` - GitHub Actions workflow
+- `scripts/update-version.js` - Custom script to update all version references in the project
+
+### Version Files Updated Automatically
+
+The release process automatically updates these files:
+
+1. **plugin/power-captcha-recaptcha.php**:
+   - Plugin Header Version: `Version:`
+   - PWRCAP_VERSION constant
+
+2. **plugin/readme.txt**:
+   - Stable tag: `Stable tag:`
+
+3. **plugin/package.json**:
+   - `version` field
+
+4. **plugin/composer.json**:
+   - No explicit version field, but maintained through plugin consistency
+
+5. **CHANGELOG.md**:
+   - Generated release notes following Keep a Changelog format
+
+See [RELEASE.md](RELEASE.md) for detailed release process documentation.
+
 ## File Conventions
 
 - PHP files: `pwrcap_` prefix for functions, `PWRCAP_` for constants
