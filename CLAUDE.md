@@ -118,6 +118,31 @@ js/
 - **Activity Report** feature: REST API at `/wp-json/pwrcap/v1/activity-report` (see `api.php`)
 - **Debug mode**: Enable in Misc settings → outputs verification responses to browser console
 
+## Commit Messages
+
+Please follow [Conventional Commits](https://www.conventionalcommits.org/) when committing changes:
+
+- `feat:` for new features
+- `fix:` for bug fixes
+- `docs:` for documentation changes
+- `style:` for formatting, missing semicolons, etc.
+- `refactor:` for code changes that neither fix bugs nor add features
+- `perf:` for performance improvements
+- `test:` for adding or correcting tests
+- `chore:` for build process changes, tooling updates, etc.
+
+Examples:
+- `feat: add reCAPTCHA v3 support to WooCommerce checkout`
+- `fix: resolve CAPTCHA validation issue on login form`
+- `docs: update CLAUDE.md with commit conventions`
+- `style: fix PHP whitespace per WordPress Coding Standards`
+- `refactor: simplify CAPTCHA verification logic`
+- `perf: cache reCAPTCHA siteverify responses for 5 minutes`
+- `test: add unit tests for WooCommerce integration`
+- `chore: update phpcs standards to WC 2.2`
+
+This helps maintain a clean, readable commit history and enables automated changelog generation.
+
 ## File Conventions
 
 - PHP files: `pwrcap_` prefix for functions, `PWRCAP_` for constants
