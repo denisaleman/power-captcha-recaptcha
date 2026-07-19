@@ -1,0 +1,102 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*' # Matches any tag starting with 'v' (e.g., v1.0.0, v2.1.3)
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed to create GitHub releases
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed to get all tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd plugin
+          npm ci
+
+      - name: Build plugin assets
+        run: |
+          cd plugin
+          npm run build
+
+      - name: Prepare plugin for release
+        run: |
+          # Create release directory
+          mkdir -p release
+
+          # Create a clean copy of the plugin for release
+          cp -r plugin release/power-captcha-recaptcha
+
+          # Remove development-only files and directories
+          cd release/power-captcha-recaptcha
+          rm -rf node_modules
+          rm -rf assets/src
+          rm -f package.json
+          rm -f package-lock.json
+          rm -f vite.config.js
+          rm -rf .git
+          rm -f .gitignore
+          rm -f .gitmodules
+
+      - name: Create release ZIP
+        run: |
+          cd release
+          zip -r power-captcha-recaptcha.zip power-captcha-recaptcha
+          echo "RELEASE_ZIP=$(pwd)/power-captcha-recaptcha.zip" >> $GITHUB_ENV
+
+      - name: Get tag information
+        id: tag_info
+        run: |
+          # Get the tag name (removes refs/tags/ prefix)
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+          # Get the tag annotation (message) for release title and body
+          # Get full tag contents (including multiline body)
+          TAG_CONTENTS=$(git tag --list "$TAG_NAME" --format='%(contents)')
+
+          # Extract first line as title/subject
+          TAG_MESSAGE=$(echo "$TAG_CONTENTS" | head -n1)
+
+          echo "tag_message=$TAG_MESSAGE" >> $GITHUB_OUTPUT
+
+          # Use full contents as body (or fallback to tag name if empty)
+          if [ -z "$TAG_CONTENTS" ]; then
+            TAG_BODY="Release $TAG_NAME"
+          else
+            TAG_BODY="$TAG_CONTENTS"
+          fi
+
+          echo "tag_body=$TAG_BODY" >> $GITHUB_OUTPUT
+
+          # Determine if this is a prerelease
+          if [[ "$TAG_NAME" =~ (-alpha|-beta|-rc[0-9]*|rc) ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_info.outputs.tag_name }}
+          name: ${{ steps.tag_info.outputs.tag_message }}
+          body: ${{ steps.tag_info.outputs.tag_body }}
+          draft: false
+          prerelease: ${{ steps.tag_info.outputs.is_prerelease == 'true' }}
+          files: ${{ env.RELEASE_ZIP }}
