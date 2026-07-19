@@ -7,8 +7,8 @@
  * Author:            Denis Alemán
  * Author URI:        https://denisaleman.com/
  * Requires at least: 5.0
- * Tested up to:      6.8.0
- * WC tested up to:   9.7.1
+ * Tested up to:      7.0.2
+ * WC tested up to:   10.9.4
  * Requires PHP:      5.5
  * Text Domain:       power-captcha-recaptcha
  * Domain Path:       /languages
