@@ -60,8 +60,8 @@ pluginMain = pluginMain.replace(
 
 // Update PWRCAP_VERSION define
 pluginMain = pluginMain.replace(
-  /(define\s*\(\s*'PWRCAP_VERSION'\s*,\s')[\d.]+('\)\s*;)/,
-  `$1${version}$2`
+  /'[0-9]+(\.[0-9]+)*'/,
+  `'${version}'`
 );
 
 fs.writeFileSync(pluginMainPath, pluginMain);
