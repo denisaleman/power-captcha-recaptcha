@@ -106,6 +106,7 @@ js/
 - `pwrcap_admin_do_tab_stage` — Add tab content
 - `pwrcap_admin_init` — Add settings sections/fields
 - `pwrcap_verification_response` — Filter reCAPTCHA verification result
+- `pwrcap_no_captcha_code_sent` — Fires when CAPTCHA response is empty or not submitted
 - `pwrcap_do_admin_notices` — Add admin notices
 - `pwrcap_daily_event` — Scheduled daily cron
 - `pwrcap_get_state_options_defaults` — Filter state defaults

@@ -253,7 +253,7 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 		/**
 		 * Fires if captcha code is an empty string or has not been sent through the form.
 		 *
-		 * @since 1.0.11
+		 * @since 1.0.9
 		 */
 		do_action( 'pwrcap_no_captcha_code_sent' );
 		return false;

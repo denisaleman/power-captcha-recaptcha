@@ -133,3 +133,10 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 * WooCommerce tested up to 9.7.1
 * Added captcha activity report feature.
 * Fixed minor bugs.
+
+= 1.2.0 (2026-07-19) =
+* Added filter pwrcap_recaptcha_expected_hostname
+* Modernized css and js files
+* Added missing composer files
+* Fixed invalid CAPTCHA error on login page
+* Fixed tab switch jitter caused by bottom border
