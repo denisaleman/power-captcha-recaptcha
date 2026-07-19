@@ -13,8 +13,15 @@ module.exports = {
       '@semantic-release/github',
       {
         assets: [
-          { path: 'plugin/power-captcha-recaptcha.php', label: 'WordPress Plugin' },
-          { path: 'plugin/readme.txt', label: 'Readme file' },
+          'plugin/**/*',
+          '!plugin/**/composer.json',
+          '!plugin/**/composer.lock',
+          '!plugin/**/package.json',
+          '!plugin/**/package-lock.json',
+          '!plugin/**/phpcs.xml',
+          '!plugin/**/vite.config.js',
+          '!plugin/**/node_modules/**',
+          { path: 'plugin/', label: 'power-captcha-recaptcha-${nextRelease.version}' }
         ],
       },
     ],
