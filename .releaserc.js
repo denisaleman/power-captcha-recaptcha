@@ -13,15 +13,7 @@ module.exports = {
       '@semantic-release/github',
       {
         assets: [
-          'plugin/**/*',
-          '!plugin/**/composer.json',
-          '!plugin/**/composer.lock',
-          '!plugin/**/package.json',
-          '!plugin/**/package-lock.json',
-          '!plugin/**/phpcs.xml',
-          '!plugin/**/vite.config.js',
-          '!plugin/**/node_modules/**',
-          { path: 'plugin/', label: 'power-captcha-recaptcha-${nextRelease.version}' }
+          { path: 'dist/*.zip', label: 'power-captcha-recaptcha-${nextRelease.version}.zip' }
         ],
       },
     ],

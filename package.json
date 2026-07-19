@@ -3,16 +3,22 @@
   "version": "1.2.0",
   "description": "Power Captcha Recaptcha",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "semantic-release"
+    "build": "node scripts/build-dist.js",
+    "release": "npm run build && semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisaleman/power-captcha-recaptcha.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denisaleman/power-captcha-recaptcha/issues"
+  },
+  "homepage": "https://github.com/denisaleman/power-captcha-recaptcha#readme",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",

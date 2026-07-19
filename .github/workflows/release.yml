@@ -38,6 +38,11 @@ jobs:
           cd plugin
           npm run build
 
+      - name: Build distribution package
+        run: |
+          chmod +x ./scripts/build-dist.js
+          ./scripts/build-dist.js
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
