@@ -77,6 +77,25 @@ function pwrcap_get_captcha_type() {
 	} elseif ( 'v2' === $plugin_options['captcha_type'] ) {
 		return $plugin_options['captcha_v2_type'];
 	}
+
+	/**
+	 * Filter the CAPTCHA type determined by the plugin.
+	 *
+	 * This filter allows developers to modify the CAPTCHA type that will be used
+	 * based on the plugin settings. The filtering occurs after the plugin has
+	 * determined the CAPTCHA type from the general options (either 'v3' for reCAPTCHA v3,
+	 * or 'v2cbx'/'v2inv' for reCAPTCHA v2 variants).
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type The CAPTCHA type determined from plugin options.
+	 *                             Possible values: 'v3', 'v2cbx', 'v2inv'.
+	 * @param array  $plugin_options The plugin options array from 'pwrcap_general_options'.
+	 *                               Contains 'captcha_type' and 'captcha_v2_type' keys.
+	 */
+	$captcha_type = apply_filters( 'pwrcap_get_captcha_type', $captcha_type, $plugin_options );
+
+	return $captcha_type;
 }
 
 /**
@@ -142,6 +161,21 @@ function pwrcap_get_captcha_api_url( $type ) {
 	} elseif ( 'v3' === $type ) {
 		$url = 'https://www.google.com/recaptcha/api.js?onload=pwrcapInitV3&render=' . esc_attr( $site_key );
 	}
+
+	/**
+	 * Filter the CAPTCHA API URL.
+	 *
+	 * This filter allows developers to modify the URL used to load the reCAPTCHA API
+	 * script based on the CAPTCHA type being used. This can be useful for customizing
+	 * the API parameters or using a different reCAPTCHA endpoint.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $url   The CAPTCHA API URL.
+	 * @param string $type  The type of CAPTCHA being used.
+	 *                      Possible values: 'v2cbx', 'v2inv', 'v3'.
+	 */
+	$url = apply_filters( 'pwrcap_get_captcha_api_url', $url, $type );
 
 	return $url;
 }
