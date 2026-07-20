@@ -298,9 +298,68 @@ function pwrcap_register_plugin_option_fields() {
 			'section_class'  => apply_filters( 'pwrcap_key_section_class', null ),
 		)
 	);
-	add_settings_field( 'captcha_type', esc_html__( 'reCAPTCHA Type', 'power-captcha-recaptcha' ), 'pwrcap_field_captcha_type', 'pwrcap_general_group', 'pwrcap_key_section' );
-	add_settings_field( 'site_key', esc_html__( 'Site Key', 'power-captcha-recaptcha' ), 'pwrcap_field_site_key', 'pwrcap_general_group', 'pwrcap_key_section' );
-	add_settings_field( 'secret_key', esc_html__( 'Secret Key', 'power-captcha-recaptcha' ), 'pwrcap_field_secret_key', 'pwrcap_general_group', 'pwrcap_key_section' );
+
+	/**
+	 * Filter the settings fields for the API keys section in the plugin settings.
+	 *
+	 * This filter allows developers to modify the array of settings fields that are
+	 * displayed in the "Setup" section of the plugin settings page, which contains
+	 * the reCAPTCHA site key and secret key fields.
+	 *
+	 * The filter is applied after the default fields have been defined but before
+	 * they are registered with the WordPress Settings API.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param array $fields Associative array of field configurations for the settings section.
+	 *                      Each field array contains:
+	 *                      - 'id'       (string) The field ID.
+	 *                      - 'title'    (string) The field label.
+	 *                      - 'callback' (string) The callback function that outputs the field HTML.
+	 *                      - 'page'     (string) The settings page slug.
+	 *                      - 'section'  (string) The settings section ID.
+	 *                      - 'args'     (array)  Additional arguments for the field.
+	 */
+	$key_section_settings_fields = apply_filters(
+		'pwrcap_key_section_settings_fields',
+		array(
+			'captcha_type' => array(
+				'id'       => 'captcha_type',
+				'title'    => esc_html__( 'reCAPTCHA Type', 'power-captcha-recaptcha' ),
+				'callback' => 'pwrcap_field_captcha_type',
+				'page'     => 'pwrcap_general_group',
+				'section'  => 'pwrcap_key_section',
+				'args'     => array(),
+			),
+			'site_key' => array(
+				'id'       => 'site_key',
+				'title'    => esc_html__( 'Site Key', 'power-captcha-recaptcha' ),
+				'callback' => 'pwrcap_field_site_key',
+				'page'     => 'pwrcap_general_group',
+				'section'  => 'pwrcap_key_section',
+				'args'     => array( 'class' => 'pwrcap-site-key-row' ),
+			),
+			'secret_key' => array(
+				'id'       => 'secret_key',
+				'title'    => esc_html__( 'Secret Key', 'power-captcha-recaptcha' ),
+				'callback' => 'pwrcap_field_secret_key',
+				'page'     => 'pwrcap_general_group',
+				'section'  => 'pwrcap_key_section',
+				'args'     => array( 'class' => 'pwrcap-secret-key-row' ),
+			),
+		)
+	);
+
+	foreach ( $key_section_settings_fields as $field ) {
+		add_settings_field(
+			$field['id'],
+			$field['title'],
+			$field['callback'],
+			$field['page'],
+			$field['section'],
+			$field['args']
+		);
+	}
 
 	add_settings_section(
 		'pwrcap_misc_section',
