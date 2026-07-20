@@ -1,20 +1,4 @@
-# Dependencies
-node_modules/
-vendor/
-
-# WordPress and SVN
-wordpress/
-svn/
-
-# Package lock files
-**/package-lock.json
-**/composer.lock
-
-# IDE and editor directories
-.claude/
-.idea/
-.vscode/
-
-# Operating system files
-.DS_Store
-Thumbs.db
+node_modules
+vendor
+wordpress
+svn
