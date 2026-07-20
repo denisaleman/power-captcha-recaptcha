@@ -102,6 +102,28 @@ function pwrcap_cf7_form_handler_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+	/**
+	 * Fires after CAPTCHA render function is hooked to the Contact Form 7 form tag handler.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the Contact Form 7 form tag handler via the `pwrcap_cf7_render_captcha` hook.
+	 *
+	 * The hook is only added if:
+	 * - CAPTCHA for Contact Form 7 is enabled via plugin settings.
+	 * - The CAPTCHA setup process has been successfully completed.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The hook name to which the CAPTCHA was attached.
+	 */
+	do_action( 'pwrcap_cf7_form_handler_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_cf7_form_handler_add_render' );
 
