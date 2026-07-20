@@ -2,3 +2,5 @@ node_modules
 vendor
 wordpress
 svn
+dist
+temp-build
