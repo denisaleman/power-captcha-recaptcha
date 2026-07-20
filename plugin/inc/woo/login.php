@@ -107,6 +107,29 @@ function pwrcap_wc_login_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+	/**
+	 * Fires after CAPTCHA render function is hooked to the WooCommerce login form.
+	 *
+	 * This hook allows developers to run custom code after the CAPTCHA logic
+	 * has been conditionally added to the `woocommerce_login_form` action,
+	 * depending on the current CAPTCHA type and plugin settings.
+	 *
+	 * Hooked during the `init` action if:
+	 * - WooCommerce login CAPTCHA is enabled via plugin options.
+	 * - CAPTCHA setup is marked as complete.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA in use (e.g., 'v2cbx', 'v2inv', 'v3').
+	 * @param string $hook         The action hook where CAPTCHA was attached (usually 'woocommerce_login_form').
+	 */
+	do_action( 'pwrcap_wc_login_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_wc_login_form_add_render' );
 

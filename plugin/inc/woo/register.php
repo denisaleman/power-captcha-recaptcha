@@ -87,6 +87,29 @@ function pwrcap_woo_register_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+		/**
+	 * Fires after CAPTCHA render function is hooked to the WooCommerce register form.
+	 *
+	 * This action is triggered once the CAPTCHA render function is conditionally
+	 * attached to the `woocommerce_register_form` hook, based on plugin settings
+	 * and the configured CAPTCHA type.
+	 *
+	 * Hooked during the `init` action if:
+	 * - CAPTCHA for WooCommerce registration form is enabled via plugin options.
+	 * - CAPTCHA setup is complete.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA in use (e.g., 'v2cbx', 'v2inv', 'v3').
+	 * @param string $hook         The action hook where CAPTCHA was attached (usually 'woocommerce_register_form').
+	 */
+	do_action( 'pwrcap_woo_register_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_woo_register_form_add_render' );
 

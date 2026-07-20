@@ -77,6 +77,32 @@ function pwrcap_woo_checkout_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+		/**
+	 * Fires after CAPTCHA render function is hooked to the WooCommerce checkout form.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the WooCommerce checkout page. The CAPTCHA is injected using the
+	 * `woocommerce_checkout_after_customer_details` hook (subject to change as noted).
+	 *
+	 * The hook is only added if:
+	 * - CAPTCHA for WooCommerce checkout is enabled via plugin options.
+	 * - The CAPTCHA setup process has been completed.
+	 *
+	 * Note: For better placement, consider using 'woocommerce_review_order_before_submit'
+	 * in the future, as indicated in the inline comment.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The hook name to which the CAPTCHA was attached.
+	 */
+	do_action( 'pwrcap_woo_checkout_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_woo_checkout_form_add_render' );
 

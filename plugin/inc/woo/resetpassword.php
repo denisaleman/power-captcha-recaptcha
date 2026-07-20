@@ -104,6 +104,29 @@ function pwrcap_woo_resetpassword_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+	/**
+	 * Fires after CAPTCHA render function is hooked to the WooCommerce reset password form.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the `woocommerce_resetpassword_form` action hook. The conditions include:
+	 * - CAPTCHA for WooCommerce reset password form is enabled via plugin options.
+	 * - The CAPTCHA setup process has been completed.
+	 *
+	 * This allows developers to hook into or extend the CAPTCHA setup logic for
+	 * the WooCommerce reset password form.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The WooCommerce form hook to which CAPTCHA was added.
+	 */
+	do_action( 'pwrcap_woo_resetpassword_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_woo_resetpassword_form_add_render' );
 

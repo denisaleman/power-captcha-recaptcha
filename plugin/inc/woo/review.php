@@ -102,6 +102,30 @@ function pwrcap_woo_review_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+		/**
+	 * Fires after CAPTCHA render function is hooked to the WooCommerce product review form.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the `comment_form_after_fields` hook, used in WooCommerce product reviews.
+	 * The hook is only added if:
+	 * - CAPTCHA for WooCommerce reviews is enabled via plugin options.
+	 * - The CAPTCHA setup process has been completed.
+	 *
+	 * This provides an opportunity for developers to modify or extend the CAPTCHA integration
+	 * on WooCommerce product review forms.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The hook name to which the CAPTCHA was attached.
+	 */
+	do_action( 'pwrcap_woo_review_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_woo_review_form_add_render' );
 
