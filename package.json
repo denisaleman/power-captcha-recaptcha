@@ -19,6 +19,9 @@
     "url": "https://github.com/denisaleman/power-captcha-recaptcha/issues"
   },
   "homepage": "https://github.com/denisaleman/power-captcha-recaptcha#readme",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
