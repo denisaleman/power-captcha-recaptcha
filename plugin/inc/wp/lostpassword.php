@@ -77,6 +77,28 @@ function pwrcap_lostpassword_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+	/**
+	 * Fires after CAPTCHA render function is hooked to the WordPress lost password form.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the WordPress lost password form via the `lostpassword_form` action hook.
+	 *
+	 * The hook is only added if:
+	 * - CAPTCHA for the lost password form is enabled via plugin settings.
+	 * - The CAPTCHA setup process has been successfully completed.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The action hook where CAPTCHA was attached (typically 'lostpassword_form').
+	 */
+	do_action( 'pwrcap_lostpassword_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_lostpassword_form_add_render' );
 

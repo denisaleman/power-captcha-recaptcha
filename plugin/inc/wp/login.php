@@ -28,12 +28,12 @@ function pwrcap_handle_login_form( $user ) {
 
 	do_action( 'pwrcap_before_handle_captcha', __FUNCTION__ );
 
-	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] && isset( $_POST['g-recaptcha-response'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' === $_SERVER['REQUEST_METHOD'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( true !== pwrcap_validate_posted_captcha() ) {
-			$user = new WP_Error( 'reCAPTCHA', '<strong>' . esc_html__( 'ERROR:', 'power-captcha-recaptcha' ) . '</strong> ' . esc_html__( 'Google reCAPTCHA verification failed.', 'power-captcha-recaptcha' ) );
+			$user = new WP_Error( 'reCAPTCHA', '<strong>' . esc_html__( 'ERROR:', 'power-captcha-recaptcha' ) . '</strong> ' . pwrcap_get_text( 'captcha-verification-failed' ) );
 		}
 	} else {
-		$user = new WP_Error( 'reCAPTCHA', '<strong>' . esc_html__( 'ERROR:', 'power-captcha-recaptcha' ) . '</strong> ' . esc_html__( 'Google reCAPTCHA verification failed.', 'power-captcha-recaptcha' ) );
+		$user = new WP_Error( 'reCAPTCHA', '<strong>' . esc_html__( 'ERROR:', 'power-captcha-recaptcha' ) . '</strong> ' . pwrcap_get_text( 'captcha-verification-failed' ) );
 	}
 
 	return $user;
@@ -84,6 +84,28 @@ function pwrcap_login_form_add_render() {
 	} elseif ( 'v3' === $captcha_type ) {
 		add_action( $hook, 'pwrcap_render_captcha_input' );
 	}
+
+	/**
+	 * Fires after CAPTCHA render function is hooked to the WordPress login form.
+	 *
+	 * This action is triggered when the plugin conditionally attaches a CAPTCHA render
+	 * function to the WordPress login form via the `login_form` action hook.
+	 *
+	 * The hook is only added if:
+	 * - CAPTCHA for the login form is enabled via plugin settings.
+	 * - The CAPTCHA setup process has been successfully completed.
+	 *
+	 * Possible `$captcha_type` values:
+	 * - 'v2cbx' — reCAPTCHA v2 Checkbox
+	 * - 'v2inv' — reCAPTCHA v2 Invisible
+	 * - 'v3'    — reCAPTCHA v3 (score-based)
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_type Type of CAPTCHA being used.
+	 * @param string $hook         The action hook where CAPTCHA was attached (typically 'login_form').
+	 */
+	do_action( 'pwrcap_login_form_add_render', $captcha_type, $hook );
 }
 add_action( 'init', 'pwrcap_login_form_add_render' );
 
