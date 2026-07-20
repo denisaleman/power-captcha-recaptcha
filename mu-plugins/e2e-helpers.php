@@ -14,7 +14,7 @@ function e2e_provide_google_test_key_hostname( $hostname ) {
 
     return "testkey.google.com";
 }
-add_filter( 'pwrcap_recaptcha_expected_hostname', 'e2e_provide_google_test_key_hostname', 10, 1 );
+add_filter( 'pwrcap_verification_expected_hostname', 'e2e_provide_google_test_key_hostname', 10, 1 );
 
 function e2e_delete_plugin_data() {
     if (!isset($_GET['delete_plugin_data'])) {

@@ -275,13 +275,24 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	$recaptcha  = new \ReCaptcha\ReCaptcha( $secret_key );
 
 	/**
-	 * Verify Captcha: Implement `setExpectedAction` and `setScoreThreshold`:
+	 * Verify Captcha: Implement `setExpectedAction`:
 	 * ->setExpectedAction( 'homepage' )
-	 * ->setScoreThreshold( 0.5 )
 	 *
 	 * @todo phpcs:ignore Generic.Commenting.Todo.CommentFound
 	 */
 
+	/**
+	 * Filter the score threshold for reCAPTCHA v3 verification.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param int $score_threshold The score threshold. Default 0.5.
+	 */
+	$score_threshold = apply_filters( 'pwrcap_verification_score_threshold', 0.5 );
+
+	if ( 'v3' === pwrcap_get_captcha_type() ) {
+		$recaptcha->setScoreThreshold( $score_threshold );
+	}
 
 	/**
 	 * Filters the expected hostname used during server-side reCAPTCHA verification.
@@ -298,9 +309,25 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	 *
 	 * @param string $expected_hostname The expected hostname. Defaults to the current server hostname.
 	 */
-	$expected_hostname = apply_filters( 'pwrcap_recaptcha_expected_hostname', $server_name );
-	$response          = $recaptcha->setExpectedHostname( $expected_hostname )->verify( $captcha_code, $ip_address );
-	$response          = apply_filters( 'pwrcap_verification_response', $response );
+	$expected_hostname = apply_filters( 'pwrcap_verification_expected_hostname', $server_name );
+
+	$recaptcha->setExpectedHostname( $expected_hostname );
+
+	$response = $recaptcha->verify( $captcha_code, $ip_address );
+
+	/**
+	 * Filter the reCAPTCHA verification response object.
+	 *
+	 * This filter allows developers to modify the reCAPTCHA response object
+	 * after it has been verified by Google's servers. This can be used to
+	 * adjust the score, modify the success status, or add additional data
+	 * to the response before it is evaluated by the plugin.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param ReCaptcha\Response $response The reCAPTCHA response object.
+	 */
+	$response = apply_filters( 'pwrcap_verification_response', $response );
 
 	return (bool) $response->isSuccess();
 }
