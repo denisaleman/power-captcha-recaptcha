@@ -11,7 +11,7 @@
   border: 1px solid #c3c4c7;
 }
 
-.nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab:hover {
+.nav-tab-wrapper.pwrcap-nav-tab-wrapper .nav-tab:not(.nav-tab-active):hover {
   background-color: #e5e5e5;
 }
 
