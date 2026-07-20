@@ -126,6 +126,7 @@ function pwrcap_debug_verification_response( $response ) {
 }
 
 // Load admin.
+
 require_once PWRCAP_DIR . '/inc/wp/common.php';
 require_once PWRCAP_DIR . '/inc/wp/login.php';
 require_once PWRCAP_DIR . '/inc/wp/register.php';
@@ -206,49 +207,14 @@ function pwrcap_validate_posted_captcha() {
 }
 
 /**
- * Retrieves the posted CAPTCHA response code from a submitted form.
+ * Verify reCAPTCHA with Google's servers.
  *
- * This function checks if the request method is POST and then attempts
- * to retrieve the CAPTCHA code from the specified POST field. If the request
- * method is not POST, it returns an empty string. The function also sanitizes
- * the retrieved CAPTCHA code to ensure safe handling.
- *
- * @since 1.0.9
- *
- * @param string $key Optional. The key of the CAPTCHA response in the POST data.
- *                    Defaults to 'g-recaptcha-response'.
- *
- * @return string The sanitized CAPTCHA response code if available, or an empty
- *                string if the request method is not POST or the CAPTCHA field
- *                is not set.
- */
-function pwrcap_get_posted_captcha_code( $key = 'g-recaptcha-response' ) {
-	$grecaptcha_response = '';
-
-	// phpcs:disable WordPress.Security.NonceVerification.Missing -- not the function's responsibility
-	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
-		return '';
-	}
-
-	if ( isset( $_POST[ $key ] ) && ! empty( $_POST[ $key ] ) ) {
-		$grecaptcha_response = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
-		// phpcs:enable
-	}
-
-	return $grecaptcha_response;
-}
-
-
-/**
- * Check if captcha code is valid.
- *
- * @since 1.0.9
+ * @since 1.3.0
  *
  * @param string $captcha_code Captcha code.
- *
- * @return bool True if valid.
+ * @return bool True if valid. False if invalid.
  */
-function pwrcap_is_valid_captcha_code( $captcha_code ) {
+function pwrcap_verify_google_recaptcha_code( $captcha_code ) {
 	if ( ! $captcha_code ) {
 		/**
 		 * Fires if captcha code is an empty string or has not been sent through the form.
@@ -284,9 +250,15 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	/**
 	 * Filter the score threshold for reCAPTCHA v3 verification.
 	 *
+	 * This filter allows developers to adjust the minimum score required for
+	 * reCAPTCHA v3 to consider a user interaction as human. For reCAPTCHA v3,
+	 * Google returns a score between 0.0 and 1.0 where higher scores indicate
+	 * more legitimate traffic. The default threshold is 0.5.
+	 *
 	 * @since 1.3.0
 	 *
-	 * @param int $score_threshold The score threshold. Default 0.5.
+	 * @param int $score_threshold The score threshold for reCAPTCHA v3 validation.
+	 *                             Value should be between 0 and 1. Default 0.5.
 	 */
 	$score_threshold = apply_filters( 'pwrcap_verification_score_threshold', 0.5 );
 
@@ -305,29 +277,139 @@ function pwrcap_is_valid_captcha_code( $captcha_code ) {
 	 * use case is automated testing with Google's official test keys, which always
 	 * return the hostname `testkey.google.com` instead of the actual site hostname.
 	 *
-	 * @since 1.2.0
+	 * @since 1.3.0
 	 *
 	 * @param string $expected_hostname The expected hostname. Defaults to the current server hostname.
 	 */
-	$expected_hostname = apply_filters( 'pwrcap_verification_expected_hostname', $server_name );
+	$expected_hostname = apply_filters( 'pwrcap_recaptcha_expected_hostname', $server_name );
+	$response          = $recaptcha->setExpectedHostname( $expected_hostname )->verify( $captcha_code, $ip_address );
+	$response          = apply_filters( 'pwrcap_verification_response', $response );
 
-	$recaptcha->setExpectedHostname( $expected_hostname );
+	return (bool) $response->isSuccess();
+}
 
-	$response = $recaptcha->verify( $captcha_code, $ip_address );
+/**
+ * Check if captcha code is valid.
+ *
+ * @since 1.0.9
+ *
+ * @param string $captcha_code Captcha code.
+ *
+ * @return bool True if valid. False if invalid or empty.
+ */
+function pwrcap_is_valid_captcha_code( $captcha_code ) {
+	if ( ! $captcha_code ) {
+		/**
+		 * Fires if captcha code is an empty string or has not been sent through the form.
+		 *
+		 * @since 1.0.9
+		 */
+		do_action( 'pwrcap_no_captcha_code_sent' );
+		return false;
+	}
 
 	/**
-	 * Filter the reCAPTCHA verification response object.
+	 * Filter the CAPTCHA verification function.
 	 *
-	 * This filter allows developers to modify the reCAPTCHA response object
-	 * after it has been verified by Google's servers. This can be used to
-	 * adjust the score, modify the success status, or add additional data
-	 * to the response before it is evaluated by the plugin.
+	 * This filter allows developers to change the function used to verify the
+	 * CAPTCHA response code. By default, the plugin uses 'pwrcap_verify_google_recaptcha_code'
+	 * to validate reCAPTCHA responses with Google's servers. This filter can be used
+	 * to replace the verification method with a custom implementation.
 	 *
 	 * @since 1.3.0
 	 *
-	 * @param ReCaptcha\Response $response The reCAPTCHA response object.
+	 * @param string $verify_function The name of the function to use for CAPTCHA verification.
+	 *                                Defaults to 'pwrcap_verify_google_recaptcha_code'.
 	 */
-	$response = apply_filters( 'pwrcap_verification_response', $response );
+	$verify_function       = apply_filters( 'pwrcap_verify_function', 'pwrcap_verify_google_recaptcha_code' );
+	$is_valid_captcha_code = $verify_function( $captcha_code );
 
-	return (bool) $response->isSuccess();
+	return apply_filters( 'pwrcap_is_valid_captcha_code', $is_valid_captcha_code, $captcha_code );
+}
+
+/**
+ * Retrieves the posted CAPTCHA response code from a submitted form.
+ *
+ * This function checks if the request method is POST and then attempts
+ * to retrieve the CAPTCHA code from the specified POST field. If the request
+ * method is not POST, it returns an empty string. The function also sanitizes
+ * the retrieved CAPTCHA code to ensure safe handling.
+ *
+ * @since 1.0.9
+ *
+ * @param string $key Optional. The key of the CAPTCHA response in the POST data.
+ *                    Defaults to 'g-recaptcha-response'.
+ *
+ * @return string The sanitized CAPTCHA response code if available, or an empty
+ *                string if the request method is not POST or the CAPTCHA field
+ *                is not set.
+ */
+function pwrcap_get_posted_captcha_code( $key = 'g-recaptcha-response' ) {
+	$captcha_code = '';
+
+	// phpcs:disable WordPress.Security.NonceVerification.Missing -- not the function's responsibility
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		return '';
+	}
+
+	if ( isset( $_POST[ $key ] ) && ! empty( $_POST[ $key ] ) ) {
+		$captcha_code = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+		// phpcs:enable
+	}
+
+	/**
+	 * Filter the CAPTCHA code retrieved from POST data.
+	 *
+	 * This filter allows developers to modify the CAPTCHA response code that was
+	 * retrieved from the POST data and sanitized by the plugin. This can be used
+	 * to modify or validate the CAPTCHA code before it is used for verification.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $captcha_code The sanitized CAPTCHA response code from POST data.
+	 *                             This will be an empty string if the request method
+	 *                             is not POST or if the CAPTCHA field was not set.
+	 */
+	$captcha_code = apply_filters( 'pwrcap_get_posted_captcha_code', $captcha_code );
+
+	return $captcha_code;
+}
+
+/**
+ * Get translatable text for Power Captcha messages.
+ *
+ * Applies a filter to allow custom messages in different contexts.
+ *
+ * @since 1.3.0
+ *
+ * @param string $msg     Message key to retrieve.
+ * @param string $context Optional context to further specify the message.
+ * @return string Translatable message string.
+ */
+function pwrcap_get_text( $msg, $context = null ) {
+	switch ( $msg ) {
+		case 'captcha-verification-failed':
+			$text = esc_html__( 'Google reCAPTCHA verification failed.', 'power-captcha-recaptcha' );
+			break;
+		default:
+			$text = '';
+			break;
+	}
+
+	/**
+	 * Filters the translatable message string used by Power Captcha.
+	 *
+	 * This allows customization of the message returned by `pwrcap_get_text()`
+	 * based on a message key and optional context. Useful for integrations,
+	 * custom UI messages, or localization enhancements.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param string $text    The translated text string associated with the message key.
+	 * @param string $msg     Original message key for the text.
+	 * @param string $context Optional context to refine or scope the message.
+	 */
+	$text = apply_filters( 'pwrcap_get_text', $text, $msg, $context );
+
+	return $text;
 }
