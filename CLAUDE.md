@@ -211,7 +211,8 @@ The release process automatically updates these files:
    - PWRCAP_VERSION constant
 
 2. **plugin/readme.txt**:
-   - Stable tag: `Stable tag:`
+   - Stable tag: `Stable tag:` (updated automatically)
+   - Changelog section: **Updated manually** (this is the only manual version-related task)
 
 3. **plugin/package.json**:
    - `version` field
