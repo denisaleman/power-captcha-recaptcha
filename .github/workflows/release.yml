@@ -8,16 +8,17 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+
     permissions:
-      contents: write  # Needed to create GitHub releases and tags
-      issues: write    # Needed to comment on issues
-      pull-requests: write  # Needed to comment on pull requests
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Needed to get all tags for semantic-release
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,14 +30,12 @@ jobs:
         run: npm ci
 
       - name: Install plugin dependencies
-        run: |
-          cd plugin
-          npm ci
+        working-directory: plugin
+        run: npm ci
 
       - name: Build plugin assets
-        run: |
-          cd plugin
-          npm run build
+        working-directory: plugin
+        run: npm run build
 
       - name: Build distribution package
         run: |
@@ -47,9 +46,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
-      - name: Update version files
-        run: |
-          chmod +x ./scripts/update-version.js
-          ./scripts/update-version.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

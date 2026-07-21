@@ -1,19 +1,33 @@
 module.exports = {
   branches: ['master'],
+
   plugins: [
     '@semantic-release/commit-analyzer',
+
     '@semantic-release/release-notes-generator',
+
     [
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
       },
     ],
+
+    [
+      '@semantic-release/exec',
+      {
+        prepareCmd: 'node scripts/update-version.js ${nextRelease.version}',
+      },
+    ],
+
     [
       '@semantic-release/github',
       {
         assets: [
-          { path: 'dist/*.zip', label: 'power-captcha-recaptcha-${nextRelease.version}.zip' }
+          {
+            path: 'dist/*.zip',
+            label: 'power-captcha-recaptcha-${nextRelease.version}.zip',
+          },
         ],
       },
     ],
@@ -28,7 +42,8 @@ module.exports = {
           'plugin/composer.json',
           'CHANGELOG.md',
         ],
-        message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+        message:
+          'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
   ],
