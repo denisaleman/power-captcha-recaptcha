@@ -142,3 +142,9 @@ Read [the official documentation](https://www.google.com/recaptcha/about/)
 * Add missing composer files.
 * Fix false CAPTCHA error on login page.
 * Fix tab switch jitter caused by bottom border.
+
+= 1.3.0 (2026-07-21) =
+* Fix hover effect on active navigation tabs for smoother navigation.
+* Improve CAPTCHA verification process and add support for translating verification messages.
+* Add more options to customize how CAPTCHA works in Contact Form 7 forms.
+* Add more options to customize how CAPTCHA works in WordPress login, registration, and comment forms.
