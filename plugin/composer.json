@@ -2,7 +2,7 @@
   "name": "denisaleman/pwrcap",
   "description": "Google reCAPTCHA integration for WordPress and WooCommerce.",
   "type": "wordpress-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "authors": [
     {
       "name": "Denis Alemán",

@@ -15,6 +15,23 @@
 * **woo:** add CAPTCHA filters to WooCommerce forms ([5df5d4c](https://github.com/denisaleman/power-captcha-recaptcha/commit/5df5d4c9c8591c396bb3cf7353c779d82d485249))
 * **wp:** add CAPTCHA filters to WordPress core forms ([14d05bb](https://github.com/denisaleman/power-captcha-recaptcha/commit/14d05bb6843bc7f811365d4724837fcc03bc692d))
 
+# [1.3.0](https://github.com/denisaleman/power-captcha-recaptcha/compare/v1.2.0...v1.3.0) (2026-07-21)
+
+
+### Bug Fixes
+
+* **admin:** prevent hover color change on active nav tabs ([77cedc0](https://github.com/denisaleman/power-captcha-recaptcha/commit/77cedc006d2556f2fdc3cffae3e36891a659d124))
+
+
+### Features
+
+* **admin:** add filter for API keys section settings fields ([bb928bc](https://github.com/denisaleman/power-captcha-recaptcha/commit/bb928bc1e4eb3a640ef762c6937b64dcab6a5d6e))
+* **api:** add filters for CAPTCHA type and API URL ([6d3c80e](https://github.com/denisaleman/power-captcha-recaptcha/commit/6d3c80e2cb886519672ed2c020e2953903b29681))
+* **cf7:** add CAPTCHA filters to Contact Form 7 ([b0e3d30](https://github.com/denisaleman/power-captcha-recaptcha/commit/b0e3d308d846eab6069d9cc95ab52ac52ee4d83b))
+* **core:** refactor captcha verification with filters and add translatable text function ([423d133](https://github.com/denisaleman/power-captcha-recaptcha/commit/423d133b07878828572f0b8056131986fef1745d))
+* **woo:** add CAPTCHA filters to WooCommerce forms ([5df5d4c](https://github.com/denisaleman/power-captcha-recaptcha/commit/5df5d4c9c8591c396bb3cf7353c779d82d485249))
+* **wp:** add CAPTCHA filters to WordPress core forms ([14d05bb](https://github.com/denisaleman/power-captcha-recaptcha/commit/14d05bb6843bc7f811365d4724837fcc03bc692d))
+
 # [1.2.0](https://github.com/denisaleman/power-captcha-recaptcha/compare/v1.1.0...v1.2.0) (2026-07-19)
 
 

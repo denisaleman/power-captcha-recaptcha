@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/denisaleman
 Tags: captcha, google recaptcha, comment form, login security, anti-spam security, form protection, woocommerce
 Requires at least: 5.0
 Tested up to: 7.0.2
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 Requires PHP: 5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
